@@ -6,8 +6,9 @@
     <button @click="signup">Signup</button>
   </form>
 </template>
+
 <script>
-import axios from "axios";
+import { api } from "../helpers/helpers";
 export default {
   name: "Signup",
   data() {
@@ -18,14 +19,13 @@ export default {
     };
   },
   methods: {
-    signup(e) {
-      e.preventDefault();
+    async signup() {
       let newUser = {
         name: this.name,
         email: this.email,
         password: this.password,
       };
-      axios.post("");
+      const res = await api.createUser(newUser);
     },
   },
 };
