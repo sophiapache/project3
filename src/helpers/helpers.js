@@ -4,8 +4,8 @@ import FlashMessage from "@smartweb/vue-flash-message";
 import "vue-flash-message/dist/vue-flash-message.min.css";
 
 Vue.use(FlashMessage, {
-  name: String,
-  tag: String,
+  // name: String,
+  // tag: String,
   time: Number,
   strategy: String,
 });
@@ -29,10 +29,10 @@ const handleError =
   (fn) =>
   (...params) =>
     fn(...params).catch((error) => {
-      vueInstance.flash(
-        `${error.response.status}: ${error.response.statusText}`,
-        "error"
-      );
+      vueInstance.flashMessage.show({
+        status: error.response.status,
+        title: error.response.statusText,
+      });
     });
 
 export const api = {

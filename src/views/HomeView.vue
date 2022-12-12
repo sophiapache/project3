@@ -15,9 +15,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.home {
-  background-color: rgb(1, 1, 55);
-}
-</style>
