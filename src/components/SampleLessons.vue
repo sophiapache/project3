@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>Sample Tutorials</h1>
+    <h2>Sample Tutorials</h2>
     <div>
       <div class="mt-4">
         <b-card
@@ -8,9 +8,12 @@
           img-alt="Card image"
           img-left
         >
+          <h1>Intro to Biology</h1>
           <b-card-text>
-            Some quick example text to build on the card and make up the bulk of
-            the card's content.
+            Biologists study life at many scales, from individual cells to
+            organisms to the entire biosphere (planet Earth). Jump in to learn
+            more about the key themes of biology and the properties of living
+            things.
           </b-card-text>
         </b-card>
 
@@ -20,8 +23,11 @@
           img-right
         >
           <b-card-text>
-            Some quick example text to build on the card and make up the bulk of
-            the card's content.
+            <h1>Intro to Chemistry</h1>
+            Chemistry is the study of matter and the ways in which different
+            forms of matter combine with each other. You study chemistry because
+            it helps you to understand the world around you. Study these lessons
+            to learn more about chemistry.
           </b-card-text>
         </b-card>
       </div>
@@ -46,10 +52,14 @@ export default {
   padding: 1em;
 }
 h1 {
-  color: white;
+  color: lightslategray;
 }
 h3 {
   margin: 40px 0 0;
+}
+h2 {
+  color: white;
+  padding-top: 50px;
 }
 ul {
   list-style-type: none;
