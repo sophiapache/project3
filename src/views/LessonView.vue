@@ -1,10 +1,9 @@
 <template>
   <main>
     <ol class="gradient-list">
-      <h1>test</h1>
-      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-      <li>
-        Aenean tincidunt elit at ipsum cursus, vitae interdum nulla suscipit.
+      <h1>Lessons</h1>
+      <li v-for="(lesson, i) in lessons" :key="i">
+        {{ lesson.title }}
       </li>
     </ol>
   </main>
