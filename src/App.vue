@@ -1,12 +1,27 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <Navbar />
     </nav>
-    <router-view/>
+    <div class="banner">
+      <img
+        src="https://thumbs.dreamstime.com/b/female-college-student-working-academic-research-close-up-female-college-student-working-academic-research-school-154308272.jpg"
+      />
+    </div>
+    <router-view />
   </div>
 </template>
+
+<script>
+import Navbar from "@/components/Navbar.vue";
+
+export default {
+  name: "App",
+  components: {
+    Navbar,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -17,9 +32,9 @@
   color: #2c3e50;
 }
 
-nav {
+/* nav {
   padding: 30px;
-}
+} */
 
 nav a {
   font-weight: bold;
