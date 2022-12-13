@@ -1,9 +1,10 @@
 <template>
-  <form>
+  <form @submit.prevent="signup">
     <label>Name: <input type="text" v-model="name" /></label>
     <label>Email: <input type="text" v-model="email" /></label>
     <label>Password: <input type="password" v-model="password" /></label>
-    <button @click="signup">Signup</button>
+    <button>Signup</button>
+    {{ error }}
   </form>
 </template>
 
@@ -16,6 +17,8 @@ export default {
       name: "",
       email: "",
       password: "",
+
+      error: "",
     };
   },
   methods: {
@@ -25,7 +28,15 @@ export default {
         email: this.email,
         password: this.password,
       };
-      const res = await api.createUser(newUser);
+      try {
+        const res = await api.createUser(newUser);
+        console.log(res);
+        this.err = "";
+        this.$router.push("/users/login");
+      } catch (err) {
+        console.error(err.response.data.error);
+        this.error = err.response.data.error;
+      }
     },
   },
 };

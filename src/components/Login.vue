@@ -1,8 +1,9 @@
 <template>
-  <form>
+  <form @submit.prevent="login">
     <input type="text" v-model="email" />
     <input type="password" v-model="password" />
-    <button @click="login">Login</button>
+    <button>Login</button>
+    {{ error }}
   </form>
 </template>
 <script>
@@ -12,6 +13,7 @@ export default {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
   methods: {
@@ -20,8 +22,18 @@ export default {
         email: this.email,
         password: this.password,
       };
-      const res = await api.loginUser(user);
-      console.log(res);
+      try {
+        const res = await api.loginUser(user);
+        console.log(res);
+        if (res.status === 200) {
+          localStorage.setItem("token", res.data.token);
+          console.log("success");
+          this.$router.push("/users/landing");
+        }
+      } catch (err) {
+        console.error(err.response);
+        this.error = err.response.data.error;
+      }
     },
   },
 };
