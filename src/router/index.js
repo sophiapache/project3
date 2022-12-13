@@ -1,10 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import SignupView from "../views/SignupView.vue";
 import LessonView from "../views/LessonView.vue";
 import QuizView from "../views/QuizView.vue";
+<<<<<<< HEAD
 import ShowLesson from "../views/ShowLesson.vue";
 import ShowSlideVideo from "../views/ShowSlideVideo.vue";
+=======
+import LandingView from "../views/LandingView";
+import LoginView from "../views/LoginView";
+>>>>>>> JWT
 
 Vue.use(VueRouter);
 
@@ -13,6 +19,21 @@ const routes = [
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/users/signup",
+    name: "signup",
+    component: SignupView,
+  },
+  {
+    path: "/users/login",
+    name: "login",
+    component: LoginView,
+  },
+  {
+    path: "/users/landing",
+    name: "landing",
+    component: LandingView,
   },
   {
     path: "/about",

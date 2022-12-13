@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <SampleLessons />
+<SampleLessons />
   </div>
 </template>
 
@@ -12,6 +12,6 @@ export default {
   name: "HomeView",
   components: {
     SampleLessons,
-  },
-};
+  }
+}
 </script>
