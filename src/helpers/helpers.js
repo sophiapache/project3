@@ -23,12 +23,9 @@ const vueInstance = new Vue();
 const baseLessonURL = "http://localhost:3000/lessons/";
 const baseQuizURL = "http://localhost:3000/quizzes/";
 const baseSlideURL = "http://localhost:3000/slides/";
-<<<<<<< HEAD
 const baseStudentLessonURL = "http://localhost:3000/studentlessons/";
-=======
 const userURL = "http://localhost:3000/users/";
 const loginURL = "http://localhost:3000/login/";
->>>>>>> JWT
 
 const handleError =
   (fn) =>
@@ -61,17 +58,11 @@ export const api = {
     const res = await axios.get(baseSlideURL + id);
     return res.data;
   }),
-<<<<<<< HEAD
+
   getStudentLesson: handleError(async () => {
     const res = await axios.get(baseStudentLessonURL);
     return res.data;
   }),
-};
-
-export const findPosition = (position, slides) => {
-  const currentSlide = slides[position];
-  return currentSlide;
-=======
   createUser: async (payload) => {
     const res = await axios.post(userURL, payload);
     return res.data;
@@ -86,5 +77,8 @@ export const findPosition = (position, slides) => {
     });
     return res;
   },
->>>>>>> JWT
+};
+export const findPosition = (position, slides) => {
+  const currentSlide = slides[position];
+  return currentSlide;
 };

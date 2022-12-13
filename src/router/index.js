@@ -4,13 +4,10 @@ import HomeView from "../views/HomeView.vue";
 import SignupView from "../views/SignupView.vue";
 import LessonView from "../views/LessonView.vue";
 import QuizView from "../views/QuizView.vue";
-<<<<<<< HEAD
 import ShowLesson from "../views/ShowLesson.vue";
 import ShowSlideVideo from "../views/ShowSlideVideo.vue";
-=======
 import LandingView from "../views/LandingView";
 import LoginView from "../views/LoginView";
->>>>>>> JWT
 
 Vue.use(VueRouter);
 
