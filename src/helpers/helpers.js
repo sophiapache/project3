@@ -24,6 +24,8 @@ const baseLessonURL = "http://localhost:3000/lessons/";
 const baseQuizURL = "http://localhost:3000/quizzes/";
 const baseSlideURL = "http://localhost:3000/slides/";
 const baseStudentLessonURL = "http://localhost:3000/studentlessons/";
+const userURL = "http://localhost:3000/users/";
+const loginURL = "http://localhost:3000/login/";
 
 const handleError =
   (fn) =>
@@ -56,12 +58,26 @@ export const api = {
     const res = await axios.get(baseSlideURL + id);
     return res.data;
   }),
+
   getStudentLesson: handleError(async () => {
     const res = await axios.get(baseStudentLessonURL);
     return res.data;
   }),
+  createUser: async (payload) => {
+    const res = await axios.post(userURL, payload);
+    return res.data;
+  },
+  loginUser: async (payload) => {
+    const res = await axios.post(loginURL, payload);
+    return res;
+  },
+  getUser: async () => {
+    const res = await axios.get(userURL, {
+      headers: { token: localStorage.getItem("token") },
+    });
+    return res;
+  },
 };
-
 export const findPosition = (position, slides) => {
   const currentSlide = slides[position];
   return currentSlide;

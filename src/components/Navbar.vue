@@ -46,7 +46,9 @@
                 <em>User</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+              <b-dropdown-item href="#" @click="logout"
+                >Sign Out</b-dropdown-item
+              >
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-navbar-nav>
@@ -58,5 +60,11 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push("/");
+    },
+  },
 };
 </script>
