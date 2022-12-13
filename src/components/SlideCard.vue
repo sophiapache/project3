@@ -24,8 +24,8 @@
           {{ text }}
         </b-card-text>
         <div class="controls">
-          <b-icon icon="caret-left" @click="onClick"></b-icon>
-          <b-icon icon="caret-right"></b-icon>
+          <b-icon icon="caret-left" @click="onBackClick"></b-icon>
+          <b-icon icon="caret-right" @click="onForwardClick"></b-icon>
         </div>
       </b-card-body>
     </b-card>
@@ -41,6 +41,14 @@ export default {
     title: String,
     lessonId: String,
     slideId: String,
+  },
+  methods: {
+    onForwardClick() {
+      this.$emit("forward");
+    },
+    onBackClick() {
+      this.$emit("back");
+    },
   },
 };
 </script>

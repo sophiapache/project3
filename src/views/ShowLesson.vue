@@ -4,7 +4,8 @@
       :text="this.slide.text"
       :image="this.slide.image"
       :title="this.slide.title"
-      @click="onClick"
+      @forward="onForwardClick"
+      @back="onBackClick"
     />
   </div>
 </template>
@@ -24,11 +25,14 @@ export default {
       slide: {},
       lessons: [],
       studentLessons: [],
-      position: "",
+      position: 0,
+      slideId: "",
     };
   },
   methods: {
-    onClick() {
+    // have child emit data to then call this function
+    onForwardClick() {
+      console.log("hello");
       const studentLessons = api.getStudentLesson();
       const lessons = api.getLessons();
       Promise.all([studentLessons, lessons]).then(
@@ -36,9 +40,26 @@ export default {
           this.studentLessons = studentLessons;
           this.lessons = lessons;
           this.position = studentLessons[0].position;
+          console.log(this.position);
           this.position++;
           console.log(this.position);
-          findPosition(this.position, lessons[0].slides);
+          this.slideId = findPosition(this.position, lessons[0].slides);
+        }
+      );
+    },
+    onBackClick() {
+      console.log("hello");
+      const studentLessons = api.getStudentLesson();
+      const lessons = api.getLessons();
+      Promise.all([studentLessons, lessons]).then(
+        ([studentLessons, lessons]) => {
+          this.studentLessons = studentLessons;
+          this.lessons = lessons;
+          this.position = studentLessons[0].position;
+          console.log(this.position);
+          this.position--;
+          console.log(this.position);
+          this.slideId = findPosition(this.position, lessons[0].slides);
         }
       );
     },
