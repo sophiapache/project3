@@ -24,7 +24,7 @@
           {{ text }}
         </b-card-text>
         <div class="controls">
-          <b-icon icon="caret-left"></b-icon>
+          <b-icon icon="caret-left" @click="onClick"></b-icon>
           <b-icon icon="caret-right"></b-icon>
         </div>
       </b-card-body>

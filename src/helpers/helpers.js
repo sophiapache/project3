@@ -61,3 +61,8 @@ export const api = {
     return res.data;
   }),
 };
+
+export const findPosition = (position, slides) => {
+  const currentSlide = slides[position];
+  return currentSlide;
+};

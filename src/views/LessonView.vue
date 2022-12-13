@@ -6,7 +6,10 @@
         <router-link
           :to="{
             name: 'show',
-            params: { lessonId: lesson._id, slideId: slideId },
+            params: {
+              lessonId: lesson._id,
+              slideId: slideId,
+            },
           }"
         >
           {{ lesson.title }}
@@ -18,6 +21,7 @@
 
 <script>
 import { api } from "../helpers/helpers";
+import findPosition from "../helpers/helpers";
 
 export default {
   name: "LessonView",
@@ -28,19 +32,13 @@ export default {
       slideId: "",
     };
   },
-  methods: {
-    findPosition(position, slides) {
-      const currentSlide = slides[position];
-      return (this.slideId = currentSlide);
-    },
-  },
   mounted() {
     const studentLessons = api.getStudentLesson();
     const lessons = api.getLessons();
     Promise.all([studentLessons, lessons]).then(([studentLessons, lessons]) => {
       this.studentLessons = studentLessons;
       this.lessons = lessons;
-      this.findPosition(studentLessons[0].position, lessons[0].slides);
+      findPosition(studentLessons[0].position, lessons[0].slides);
     });
   },
 };
