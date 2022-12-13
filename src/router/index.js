@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LessonView from "../views/LessonView.vue";
 import QuizView from "../views/QuizView.vue";
+import ShowLesson from "../views/ShowLesson.vue";
+import ShowSlideVideo from "../views/ShowSlideVideo.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +32,16 @@ const routes = [
     path: "/quizzes",
     name: "quizzes",
     component: QuizView,
+  },
+  {
+    path: "/:lessonId/:slideId",
+    name: "show",
+    component: ShowLesson,
+  },
+  {
+    path: "/:lessonId/:slideId/video",
+    name: "video",
+    component: ShowSlideVideo,
   },
 ];
 

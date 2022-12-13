@@ -23,6 +23,7 @@ const vueInstance = new Vue();
 const baseLessonURL = "http://localhost:3000/lessons/";
 const baseQuizURL = "http://localhost:3000/quizzes/";
 const baseSlideURL = "http://localhost:3000/slides/";
+const baseStudentLessonURL = "http://localhost:3000/studentlessons/";
 
 const handleError =
   (fn) =>
@@ -53,6 +54,10 @@ export const api = {
   }),
   getSlide: handleError(async (id) => {
     const res = await axios.get(baseSlideURL + id);
+    return res.data;
+  }),
+  getStudentLesson: handleError(async () => {
+    const res = await axios.get(baseStudentLessonURL);
     return res.data;
   }),
 };

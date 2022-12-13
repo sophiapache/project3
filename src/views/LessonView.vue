@@ -3,7 +3,14 @@
     <ol class="gradient-list">
       <h1>Lessons</h1>
       <li v-for="(lesson, i) in lessons" :key="i">
-        {{ lesson.title }}
+        <router-link
+          :to="{
+            name: 'show',
+            params: { lessonId: lesson._id, slideId: slideId },
+          }"
+        >
+          {{ lesson.title }}
+        </router-link>
       </li>
     </ol>
   </main>
@@ -17,10 +24,24 @@ export default {
   data() {
     return {
       lessons: [],
+      studentLessons: [],
+      slideId: "",
     };
   },
-  async mounted() {
-    this.lessons = await api.getLessons();
+  methods: {
+    findPosition(position, slides) {
+      const currentSlide = slides[position];
+      return (this.slideId = currentSlide);
+    },
+  },
+  mounted() {
+    const studentLessons = api.getStudentLesson();
+    const lessons = api.getLessons();
+    Promise.all([studentLessons, lessons]).then(([studentLessons, lessons]) => {
+      this.studentLessons = studentLessons;
+      this.lessons = lessons;
+      this.findPosition(studentLessons[0].position, lessons[0].slides);
+    });
   },
 };
 </script>
