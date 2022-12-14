@@ -3,14 +3,11 @@
     <ol class="gradient-list">
       <h1>Lessons</h1>
       <li v-for="(lesson, i) in lessons" :key="i">
+        {{ findStudentLesson({ user: userID, lesson: lesson._id }) }}
         <router-link
-          {{findStudentLesson(i)}}
           :to="{
             name: 'show',
-            params: {
-              lessonId: lesson._id,
-              slideId: lesson.slides[0],
-            },
+            params: { lessonId: lesson._id, slideId: lesson.slides[0] },
           }"
         >
           {{ lesson.title }}
@@ -22,7 +19,6 @@
 
 <script>
 import { api, findPosition } from "../helpers/helpers";
-
 export default {
   name: "LessonView",
   data() {
@@ -30,18 +26,20 @@ export default {
       lessons: [],
       studentLessons: [],
       slideId: "",
+      userID: "",
     };
+  },
+  props: {
+    user: Object,
   },
   mounted() {
     const studentLessons = api.getStudentLesson();
     const lessons = api.getLessons();
     Promise.all([studentLessons, lessons]).then(([studentLessons, lessons]) => {
+      this.userID = this._props.user.id;
+      // console.log("working");
       this.studentLessons = studentLessons;
       this.lessons = lessons;
-      this.slideId = findPosition(
-        studentLessons[0].position,
-        lessons[1].slides
-      );
     });
   },
   created() {
@@ -50,8 +48,9 @@ export default {
     }
   },
   methods: {
-    findStudentLesson(i) {
-      console.log("find student lesson", i.slides[0]);
+    async findStudentLesson(obj) {
+      const res = await api.findStudentLessons(obj);
+      // console.log(res, "return");
     },
   },
 };
