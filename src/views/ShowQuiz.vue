@@ -2,8 +2,8 @@
   <div>
     {{ quizzes.name }}
     <b-form-group
-      v-for="(quiz, i) in quizzes.Questions"
-      :label="quizzes.Questions"
+      v-for="(quiz, i) in quiz.Questions"
+      :label="quiz.Questions"
       v-slot="{ ariaDescribedby }"
       :key="i"
     >
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       quizzes: {},
+      questions: {},
       selected1: "",
       selected2: "",
       selected3: "",
@@ -60,6 +61,8 @@ export default {
   },
   async mounted() {
     this.quizzes = await api.getQuiz(this.$route.params.quizId);
+    console.log(this.quizzes.Questions);
+    this.questions = this.quizzes.Questions;
   },
 };
 </script>
