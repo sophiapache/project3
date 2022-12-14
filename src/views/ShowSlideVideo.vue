@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { api, verifyUser } from "../helpers/helpers";
+import { api } from "../helpers/helpers";
 import VideoSlideCard from "@/components/VideoSlideCard.vue";
 
 export default {

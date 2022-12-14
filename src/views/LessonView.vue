@@ -3,6 +3,7 @@
     <ol class="gradient-list">
       <h1>Lessons</h1>
       <li v-for="(lesson, i) in lessons" :key="i">
+        {{ findStudentLesson(i) }}
         <router-link
           :to="{
             name: 'show',
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { api, findPosition, verifyUser } from "../helpers/helpers";
+import { api, findPosition } from "../helpers/helpers";
 
 export default {
   name: "LessonView",
@@ -37,13 +38,21 @@ export default {
     Promise.all([studentLessons, lessons]).then(([studentLessons, lessons]) => {
       this.studentLessons = studentLessons;
       this.lessons = lessons;
-      findPosition(studentLessons[0].position, lessons[0].slides);
+      this.slideId = findPosition(
+        studentLessons[0].position,
+        lessons[0].slides
+      );
     });
   },
   created() {
     if (localStorage.getItem("token") === null) {
       this.$router.push("/users/login");
     }
+  },
+  methods: {
+    findStudentLesson(i) {
+      console.log("find student lesson", i);
+    },
   },
 };
 </script>
