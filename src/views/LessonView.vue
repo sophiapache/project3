@@ -4,6 +4,7 @@
       <h1>Lessons</h1>
       <li v-for="(lesson, i) in lessons" :key="i">
         <router-link
+          {{findStudentLesson(i)}}
           :to="{
             name: 'show',
             params: {

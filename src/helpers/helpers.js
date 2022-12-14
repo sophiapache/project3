@@ -77,6 +77,10 @@ export const api = {
     });
     return res;
   },
+  findStudentLessons: handleError(async (ids) => {
+    const res = await axios.get(baseStudentLessonURL + ids);
+    return res.data;
+  }),
 };
 export const findPosition = (position, slides) => {
   const currentSlide = slides[position];
