@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { api, verifyUser } from "../helpers/helpers";
+import { api } from "../helpers/helpers";
 import SlideCard from "@/components/SlideCard.vue";
 import { findPosition } from "../helpers/helpers";
 
@@ -37,15 +37,12 @@ export default {
       Promise.all([studentLessons, lessons]).then(
         ([studentLessons, lessons]) => {
           this.studentLessons = studentLessons;
-          console.log(lessons);
           this.lessons = lessons;
-          if (this.position < this.lessons.slides.length - 1) {
+          if (this.position >= this.lessons.slides.length - 1) {
             return;
           } else {
             this.position++;
-            console.log(this.position);
             this.slideId = findPosition(this.position, lessons.slides);
-            console.log(this.slideId);
             this.$router.push(
               `/${this.$route.params.lessonId}/${this.slideId}`
             );
@@ -84,7 +81,6 @@ export default {
   async mounted() {
     this.slide = await api.getSlide(this.$route.params.slideId);
     const studentLessons = api.getStudentLesson().then((studentLesson) => {
-      console.log(studentLesson[0].position);
       this.position = studentLesson[0].position;
     });
   },

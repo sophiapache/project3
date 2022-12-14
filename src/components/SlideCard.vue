@@ -44,9 +44,11 @@ export default {
   },
   methods: {
     onForwardClick() {
+      console.log("forward");
       this.$emit("forward");
     },
     onBackClick() {
+      console.log("back");
       this.$emit("back");
     },
   },

@@ -80,6 +80,7 @@ export const api = {
 };
 export const findPosition = (position, slides) => {
   const currentSlide = slides[position];
+  console.log(currentSlide);
   return currentSlide;
 };
 
