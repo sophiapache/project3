@@ -23,9 +23,9 @@ export default {
   data() {
     return {
       slide: {},
-      lessons: [],
+      lessons: {},
       studentLessons: [],
-      position: null,
+      position: 0,
       slideId: "",
     };
   },
@@ -33,48 +33,49 @@ export default {
     // have child emit data to then call this function
     onForwardClick() {
       const studentLessons = api.getStudentLesson();
-      const lessons = api.getLessons();
+      const lessons = api.getLesson(this.$route.params.lessonId);
       Promise.all([studentLessons, lessons]).then(
         ([studentLessons, lessons]) => {
           this.studentLessons = studentLessons;
+          console.log(lessons);
           this.lessons = lessons;
-          this.position = studentLessons[0].position;
-          console.log(this.position);
           if (this.position < this.lessons.slides.length - 1) {
             return;
           } else {
             this.position++;
             console.log(this.position);
-            this.slideId = findPosition(this.position, lessons[0].slides);
+            this.slideId = findPosition(this.position, lessons.slides);
             console.log(this.slideId);
             this.$router.push(
               `/${this.$route.params.lessonId}/${this.slideId}`
             );
-            // this.slide = api.getSlide(this.$route.params.slideId);
+            const slides = api.getSlide(this.slideId).then((slides) => {
+              this.slide = slides;
+            });
           }
         }
       );
     },
     onBackClick() {
       const studentLessons = api.getStudentLesson();
-      const lessons = api.getLessons();
+      const lessons = api.getLesson(this.$route.params.lessonId);
       Promise.all([studentLessons, lessons]).then(
         ([studentLessons, lessons]) => {
           this.studentLessons = studentLessons;
           this.lessons = lessons;
-          this.position = studentLessons[0].position;
-          console.log(this.position);
           if (this.position === 0) {
             return;
           } else {
             this.position--;
             console.log(this.position);
-            this.slideId = findPosition(this.position, this.lessons[0].slides);
+            this.slideId = findPosition(this.position, this.lessons.slides);
             console.log(this.slideId);
             this.$router.push(
               `/${this.$route.params.lessonId}/${this.slideId}`
             );
-            // this.slide = api.getSlide(this.$route.params.slideId);
+            const slides = api.getSlide(this.slideId).then((slides) => {
+              this.slide = slides;
+            });
           }
         }
       );
@@ -82,6 +83,10 @@ export default {
   },
   async mounted() {
     this.slide = await api.getSlide(this.$route.params.slideId);
+    const studentLessons = api.getStudentLesson().then((studentLesson) => {
+      console.log(studentLesson[0].position);
+      this.position = studentLesson[0].position;
+    });
   },
 };
 </script>
