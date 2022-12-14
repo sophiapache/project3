@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import SignupView from "../views/SignupView.vue";
 import LessonView from "../views/LessonView.vue";
 import QuizView from "../views/QuizView.vue";
+import ShowQuiz from "../views/ShowQuiz.vue";
 import ShowLesson from "../views/ShowLesson.vue";
 import ShowSlideVideo from "../views/ShowSlideVideo.vue";
 import LandingView from "../views/LandingView";
@@ -60,6 +61,11 @@ const routes = [
     path: "/:lessonId/:slideId/video",
     name: "video",
     component: ShowSlideVideo,
+  },
+  {
+    path: "/quizzes/:lessonId",
+    name: "showQuiz",
+    component: ShowQuiz,
   },
 ];
 

@@ -3,7 +3,16 @@
     <ol class="gradient-list">
       <h1>Quizzes</h1>
       <li v-for="(quiz, i) in quizzes" :key="i">
-        {{ quiz }}
+        <router-link
+          :to="{
+            name: 'showQuiz',
+            params: {
+              lessonId: quiz.lessonId,
+            },
+          }"
+        >
+          {{ quiz.name }}
+        </router-link>
       </li>
     </ol>
   </main>
