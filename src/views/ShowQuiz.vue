@@ -2,8 +2,10 @@
   <div>
     {{ quizzes.name }}
     <b-form-group
-      :label="quizzes.Questions[0].Question"
+      v-for="(quiz, i) in quizzes.Questions"
+      :label="quizzes.Questions"
       v-slot="{ ariaDescribedby }"
+      :key="i"
     >
       <b-form-radio
         v-model="selected1"
