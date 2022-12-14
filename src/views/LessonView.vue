@@ -21,7 +21,7 @@
 
 <script>
 import { api } from "../helpers/helpers";
-import findPosition from "../helpers/helpers";
+import { findPosition } from "../helpers/helpers";
 
 export default {
   name: "LessonView",
@@ -38,7 +38,10 @@ export default {
     Promise.all([studentLessons, lessons]).then(([studentLessons, lessons]) => {
       this.studentLessons = studentLessons;
       this.lessons = lessons;
-      findPosition(studentLessons[0].position, lessons[0].slides);
+      this.slideId = findPosition(
+        studentLessons[0].position,
+        lessons[1].slides
+      );
     });
   },
 };
