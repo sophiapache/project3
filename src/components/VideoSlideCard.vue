@@ -45,9 +45,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-div.text-center {
-  padding: 5em 5em 5em 5em;
-}
-</style>

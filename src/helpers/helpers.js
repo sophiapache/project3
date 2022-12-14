@@ -31,6 +31,7 @@ const handleError =
   (fn) =>
   (...params) =>
     fn(...params).catch((error) => {
+      console.log("erorr", error);
       vueInstance.flashMessage.show({
         status: error.response.status,
         title: error.response.statusText,

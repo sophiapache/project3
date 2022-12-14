@@ -40,7 +40,7 @@ export default {
       this.lessons = lessons;
       this.slideId = findPosition(
         studentLessons[0].position,
-        lessons[0].slides
+        lessons[1].slides
       );
     });
   },
