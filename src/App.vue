@@ -8,17 +8,36 @@
         src="https://thumbs.dreamstime.com/b/female-college-student-working-academic-research-close-up-female-college-student-working-academic-research-school-154308272.jpg"
       />
     </div>
-    <router-view />
+    <router-view :user="user" />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
-
+import { api } from "./helpers/helpers";
 export default {
   name: "App",
   components: {
     Navbar,
+  },
+  async mounted() {
+    try {
+      const res = await api.getUser();
+      this.user.name = res.data.user.name;
+      this.user.email = res.data.user.email;
+      this.user.id = res.data.user.id;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  data() {
+    return {
+      user: {
+        email: "",
+        name: "",
+        id: null,
+      },
+    };
   },
 };
 </script>

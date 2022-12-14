@@ -45,6 +45,8 @@
               <template #button-content>
                 <em>User</em>
               </template>
+              <b-dropdown-item href="/users/signup">Sign Up</b-dropdown-item>
+              <b-dropdown-item href="/users/login">Sign In</b-dropdown-item>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="#" @click="logout"
                 >Sign Out</b-dropdown-item

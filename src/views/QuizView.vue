@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { api } from "../helpers/helpers";
+import { api, verifyUser } from "../helpers/helpers";
 
 export default {
   name: "QuizView",
@@ -21,6 +21,11 @@ export default {
   },
   async mounted() {
     this.quizzes = await api.getQuizzes();
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/users/login");
+    }
   },
 };
 </script>

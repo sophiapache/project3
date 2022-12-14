@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { api } from "../helpers/helpers";
+import { api, verifyUser } from "../helpers/helpers";
 import SlideCard from "@/components/SlideCard.vue";
 import { findPosition } from "../helpers/helpers";
 
@@ -87,6 +87,11 @@ export default {
       console.log(studentLesson[0].position);
       this.position = studentLesson[0].position;
     });
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/users/login");
+    }
   },
 };
 </script>

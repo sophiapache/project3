@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { api } from "../helpers/helpers";
+import { api, verifyUser } from "../helpers/helpers";
 import VideoSlideCard from "@/components/VideoSlideCard.vue";
 
 export default {
@@ -25,6 +25,11 @@ export default {
   },
   async mounted() {
     this.slide = await api.getSlide(this.$route.params.slideId);
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/users/login");
+    }
   },
 };
 </script>
