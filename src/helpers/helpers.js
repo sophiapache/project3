@@ -58,7 +58,6 @@ export const api = {
     const res = await axios.get(baseSlideURL + id);
     return res.data;
   }),
-
   getStudentLesson: handleError(async () => {
     const res = await axios.get(baseStudentLessonURL);
     return res.data;
@@ -81,4 +80,15 @@ export const api = {
 export const findPosition = (position, slides) => {
   const currentSlide = slides[position];
   return currentSlide;
+};
+
+export const verifyUser = async () => {
+  try {
+    const res = await api.getUser();
+    this.name = res.data.user.name;
+    this.email = res.data.user.email;
+    this.id = res.data.user.id;
+  } catch (err) {
+    console.log(err);
+  }
 };

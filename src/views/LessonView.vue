@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { api } from "../helpers/helpers";
-import findPosition from "../helpers/helpers";
+import { api, findPosition, verifyUser } from "../helpers/helpers";
 
 export default {
   name: "LessonView",
@@ -40,6 +39,11 @@ export default {
       this.lessons = lessons;
       findPosition(studentLessons[0].position, lessons[0].slides);
     });
+  },
+  created() {
+    if (localStorage.getItem("token") === null) {
+      this.$router.push("/users/login");
+    }
   },
 };
 </script>
