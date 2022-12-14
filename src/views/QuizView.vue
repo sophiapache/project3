@@ -7,7 +7,7 @@
           :to="{
             name: 'showQuiz',
             params: {
-              lessonId: quiz.lessonId,
+              quizId: quiz._id,
             },
           }"
         >

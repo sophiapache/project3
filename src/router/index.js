@@ -63,7 +63,7 @@ const routes = [
     component: ShowSlideVideo,
   },
   {
-    path: "/quizzes/:lessonId",
+    path: "/quizzes/:quizId",
     name: "showQuiz",
     component: ShowQuiz,
   },
