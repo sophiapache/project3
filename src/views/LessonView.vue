@@ -3,13 +3,12 @@
     <ol class="gradient-list">
       <h1>Lessons</h1>
       <li v-for="(lesson, i) in lessons" :key="i">
-        {{ findStudentLesson(i) }}
         <router-link
           :to="{
             name: 'show',
             params: {
               lessonId: lesson._id,
-              slideId: slideId,
+              slideId: lesson.slides[0],
             },
           }"
         >
@@ -51,7 +50,7 @@ export default {
   },
   methods: {
     findStudentLesson(i) {
-      console.log("find student lesson", i);
+      console.log("find student lesson", i.slides[0]);
     },
   },
 };
