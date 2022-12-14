@@ -54,6 +54,7 @@ export const api = {
   }),
   getQuizzes: handleError(async () => {
     const res = await axios.get(baseQuizURL);
+    console.log(res.data);
     return res.data;
   }),
   getSlide: handleError(async (id) => {

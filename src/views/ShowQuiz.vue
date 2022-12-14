@@ -3,7 +3,7 @@
     {{ quizzes.name }}
     <b-form-group
       v-for="(quiz, i) in quizzes.Questions"
-      :label="quizzes.Questions"
+      :label="quiz.Question"
       v-slot="{ ariaDescribedby }"
       :key="i"
     >
@@ -12,33 +12,21 @@
         :aria-describedby="ariaDescribedby"
         name="some-radios"
         value="A"
-        >Option A</b-form-radio
+        >{{ quiz.A1 }}</b-form-radio
       >
       <b-form-radio
         v-model="selected1"
         :aria-describedby="ariaDescribedby"
         name="some-radios"
         value="B"
-        >Option B</b-form-radio
-      >
-    </b-form-group>
-    <b-form-group
-      :label="quizzes.Questions[1].Question"
-      v-slot="{ ariaDescribedby }"
-    >
-      <b-form-radio
-        v-model="selected2"
-        :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="A"
-        >Option A</b-form-radio
+        >{{ quiz.A2 }}</b-form-radio
       >
       <b-form-radio
         v-model="selected2"
         :aria-describedby="ariaDescribedby"
         name="some-radios"
-        value="B"
-        >Option B</b-form-radio
+        value="C"
+        >{{ quiz.A3 }}</b-form-radio
       >
     </b-form-group>
   </div>
@@ -50,7 +38,7 @@ export default {
   name: "ShowQuiz",
   data() {
     return {
-      quizzes: {},
+      quizzes: [],
       selected1: "",
       selected2: "",
       selected3: "",
