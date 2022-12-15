@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <nav>
-      <Navbar />
+      <Navbar :login="this.login" />
     </nav>
     <div class="banner">
       <img
         src="https://thumbs.dreamstime.com/b/female-college-student-working-academic-research-close-up-female-college-student-working-academic-research-school-154308272.jpg"
       />
     </div>
-    <router-view :user="user" />
+    <router-view :user="user" @toggle-login="toggleLogin" />
   </div>
 </template>
 
@@ -30,6 +30,12 @@ export default {
       console.log(err);
     }
   },
+  methods: {
+    toggleLogin(bool) {
+      console.log("toggle");
+      this.login = bool;
+    },
+  },
   data() {
     return {
       user: {
@@ -37,6 +43,7 @@ export default {
         name: "",
         id: null,
       },
+      login: false,
     };
   },
 };

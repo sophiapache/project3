@@ -50,10 +50,10 @@ export default {
       };
       try {
         const res = await api.loginUser(user);
-        console.log(res);
+
         if (res.status === 200) {
           localStorage.setItem("token", res.data.token);
-          console.log("success");
+          this.$emit("toggleLogin", true);
           this.$router.push("/users/landing");
         }
       } catch (err) {
