@@ -10,7 +10,7 @@
         v-model="password"
         required
       /><br />
-      <input type="button" value="Sign up" /><br />
+      <input type="submit" value="Sign up" /><br />
       {{ error }}
     </form>
 

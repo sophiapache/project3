@@ -23,7 +23,11 @@
               </router-link></b-dropdown-item
             >
             <b-dropdown-item href="#">Intro to Biology</b-dropdown-item>
-            <b-dropdown-item href="#">Intro to Chemistry</b-dropdown-item>
+            <b-dropdown-item
+              :to="{ path: '/quizzes/639aa770603f11cc25f8b5d3' }"
+            >
+              Intro
+            </b-dropdown-item>
             <b-dropdown-item href="#">Intro to Physics</b-dropdown-item>
           </b-nav-item-dropdown>
 
@@ -35,7 +39,8 @@
                 </router-link></b-dropdown-item
               >
               <b-dropdown-item href="#">Intro to Biology Quiz</b-dropdown-item>
-              <b-dropdown-item href="#"
+              <b-dropdown-item
+                :to="{ path: '/quizzes/639aa770603f11cc25f8b5d3' }"
                 >Intro to Chemistry Quiz</b-dropdown-item
               >
               <b-dropdown-item href="#">Intro to Physics Quiz</b-dropdown-item>

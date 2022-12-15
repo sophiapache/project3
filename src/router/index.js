@@ -53,19 +53,20 @@ const routes = [
     component: QuizView,
   },
   {
+    path: "/quizzes/:quizId",
+    name: "showQuiz",
+    component: ShowQuiz,
+  },
+  {
     path: "/:lessonId/:slideId",
     name: "show",
     component: ShowLesson,
   },
+
   {
     path: "/:lessonId/:slideId/video",
     name: "video",
     component: ShowSlideVideo,
-  },
-  {
-    path: "/quizzes/:quizId",
-    name: "showQuiz",
-    component: ShowQuiz,
   },
 ];
 
