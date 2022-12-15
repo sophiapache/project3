@@ -50,7 +50,7 @@
           studentLessons[i].grade
         "
       >
-        <strong>Intro to Chstrongistry Quiz:</strong> {{ studentLesson.grade }}
+        <strong>Intro to Chemistry Quiz:</strong> {{ studentLesson.grade }}
       </span>
       <span
         v-if="
