@@ -50,14 +50,22 @@
               <template #button-content>
                 <em>User</em>
               </template>
-              <b-dropdown-item href="/users/signup">Sign Up</b-dropdown-item>
-              <b-dropdown-item href="/users/login">Sign In</b-dropdown-item>
-              <b-dropdown-item href="#"
-                ><router-link to="/users/landing" exact>
-                  <i class="comment outline icon" /> profile
+              <b-dropdown-item v-if="!login"
+                ><router-link to="/users/signup" exact>
+                  Sign up
                 </router-link></b-dropdown-item
               >
-              <b-dropdown-item href="#" @click="logout"
+              <b-dropdown-item v-if="!login"
+                ><router-link to="/users/login" exact>
+                  Sign In
+                </router-link></b-dropdown-item
+              >
+              <b-dropdown-item v-if="login"
+                ><router-link to="/users/landing" exact>
+                  profile
+                </router-link></b-dropdown-item
+              >
+              <b-dropdown-item v-if="login" @click="logout"
                 >Sign Out</b-dropdown-item
               >
             </b-nav-item-dropdown>
@@ -71,9 +79,22 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      login: false,
+    };
+  },
+  mounted() {
+    if (localStorage.getItem("token") === null) {
+      this.login = false;
+    } else {
+      this.login = true;
+    }
+  },
   methods: {
     logout() {
       localStorage.clear();
+      this.login("false");
       this.$router.push("/");
     },
   },
