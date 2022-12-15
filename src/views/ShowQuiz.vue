@@ -1,47 +1,36 @@
 <template>
-  <div>
+  <form @submit.prevent="onSubmit">
     {{ quizzes.name }}
     <b-form-group
-      v-for="(quiz, i) in quiz.Questions"
-      :label="quiz.Questions"
+      v-for="(quiz, i) in quizzes.Questions"
+      :label="quiz.Question"
       v-slot="{ ariaDescribedby }"
       :key="i"
     >
       <b-form-radio
-        v-model="selected1"
         :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="A"
-        >Option A</b-form-radio
+        :name="quiz.Question"
+        :value="quiz.A1"
+        @change="attempt($event, i)"
+        >{{ quiz.A1 }}</b-form-radio
       >
       <b-form-radio
-        v-model="selected1"
         :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="B"
-        >Option B</b-form-radio
+        :name="quiz.Question"
+        :value="quiz.A2"
+        @change="attempt($event, i)"
+        >{{ quiz.A2 }}</b-form-radio
+      >
+      <b-form-radio
+        :aria-describedby="ariaDescribedby"
+        :name="quiz.Question"
+        :value="quiz.A3"
+        @change="attempt($event, i)"
+        >{{ quiz.A3 }}</b-form-radio
       >
     </b-form-group>
-    <b-form-group
-      :label="quizzes.Questions[1].Question"
-      v-slot="{ ariaDescribedby }"
-    >
-      <b-form-radio
-        v-model="selected2"
-        :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="A"
-        >Option A</b-form-radio
-      >
-      <b-form-radio
-        v-model="selected2"
-        :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="B"
-        >Option B</b-form-radio
-      >
-    </b-form-group>
-  </div>
+    <button>Submit</button>
+  </form>
 </template>
 
 <script>
@@ -50,19 +39,26 @@ export default {
   name: "ShowQuiz",
   data() {
     return {
-      quizzes: {},
-      questions: {},
-      selected1: "",
-      selected2: "",
-      selected3: "",
-      selected4: "",
-      selected5: "",
+      quizzes: [],
+      answers: [],
+      selected: [],
     };
+  },
+  methods: {
+    onSubmit() {
+      // for (i=0;i<this.quizzes.Questions.length;i++) {
+      //   if (this.quizzes.Questions.attempt === )
+      // }
+    },
+    attempt(e, i) {
+      this.quizzes.Questions[i].attempt = e;
+    },
   },
   async mounted() {
     this.quizzes = await api.getQuiz(this.$route.params.quizId);
+    this.quizzes.Questions.forEach((q) => (q.attempt = null));
     console.log(this.quizzes.Questions);
-    this.questions = this.quizzes.Questions;
+    // this.questions = this.quizzes.Questions;
   },
 };
 </script>

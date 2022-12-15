@@ -23,7 +23,8 @@ const vueInstance = new Vue();
 const baseLessonURL = "http://localhost:3000/lessons/";
 const baseQuizURL = "http://localhost:3000/quizzes/";
 const baseSlideURL = "http://localhost:3000/slides/";
-const baseStudentLessonURL = "http://localhost:3000/studentlessons/";
+const baseStudentLessonsURL = "http://localhost:3000/studentlessons/";
+const baseStudentLessonURL = "http://localhost:3000/studentlesson/";
 const userURL = "http://localhost:3000/users/";
 const loginURL = "http://localhost:3000/login/";
 
@@ -53,6 +54,7 @@ export const api = {
   }),
   getQuizzes: handleError(async () => {
     const res = await axios.get(baseQuizURL);
+    console.log(res.data);
     return res.data;
   }),
   getSlide: handleError(async (id) => {
@@ -60,7 +62,8 @@ export const api = {
     return res.data;
   }),
   getStudentLesson: handleError(async () => {
-    const res = await axios.get(baseStudentLessonURL);
+    // console.log("front end");
+    const res = await axios.get(baseStudentLessonsURL);
     return res.data;
   }),
   createUser: async (payload) => {
@@ -75,6 +78,21 @@ export const api = {
     const res = await axios.get(userURL, {
       headers: { token: localStorage.getItem("token") },
     });
+    return res;
+  },
+  findStudentLessons: handleError(async (ids) => {
+    // console.log(ids);
+    let res = await axios.get(
+      `${baseStudentLessonURL}?lesson=${ids.lesson}&user=${ids.user}`
+    );
+    if (res.data.length === 0) {
+      res = api.createStudentLesson(ids);
+    }
+    console.log(res);
+    return res;
+  }),
+  createStudentLesson: async (payload) => {
+    const res = await axios.post(baseStudentLessonsURL, payload);
     return res;
   },
 };
