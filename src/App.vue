@@ -8,7 +8,7 @@
         src="https://thumbs.dreamstime.com/b/female-college-student-working-academic-research-close-up-female-college-student-working-academic-research-school-154308272.jpg"
       />
     </div>
-    <router-view :user="user" @toggle-login="toggleLogin" />
+    <router-view :user="user" @userLogin="userLogin" />
   </div>
 </template>
 
@@ -31,9 +31,8 @@ export default {
     }
   },
   methods: {
-    toggleLogin(bool) {
-      console.log("toggle");
-      this.login = bool;
+    userLogin(user) {
+      console.log(user);
     },
   },
   data() {
