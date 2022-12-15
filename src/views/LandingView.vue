@@ -1,8 +1,21 @@
 <template>
   <div>
+    <font-awesome-icon icon="fa-solid fa-frog" />
+
     <h1>Hello {{ name }}</h1>
     <h2>your email is {{ email }}</h2>
     <h3>your ID is {{ id }}</h3>
+    <div v-for="(studentLesson, i) in studentLessons" :key="i">
+      <span v-if="studentLessons[i].grade">
+        <font-awesome-icon
+          icon="fa-solid fa-frog"
+          v-if="studentLessons[i].lessonId === '6396843b46e9febd191de195'"
+        />
+      </span>
+    </div>
+    <li v-for="(studentLesson, i) in studentLessons" :key="i">
+      {{ studentLesson.lessonId }}: {{ studentLesson.grade }}
+    </li>
   </div>
 </template>
 
