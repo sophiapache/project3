@@ -16,7 +16,7 @@
         id="password-input-1"
         required
       /><br />
-      <input type="button" value="Login" /><br />
+      <input type="submit" value="Login" /><br />
       {{ error }}
     </form>
 

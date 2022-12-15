@@ -3,11 +3,10 @@
     <ol class="gradient-list">
       <h1>Lessons</h1>
       <li v-for="(lesson, i) in lessons" :key="i">
-        {{ findStudentLesson({ user: userID, lesson: lesson._id }) }}
         <router-link
           :to="{
             name: 'show',
-            params: { lessonId: lesson._id, slideId: lesson.slides[0] },
+            params: { lessonId: lesson._id, slideId: lesson.slides[position] },
           }"
         >
           {{ lesson.title }}
@@ -18,7 +17,7 @@
 </template>
 
 <script>
-import { api, findPosition } from "../helpers/helpers";
+import { api } from "../helpers/helpers";
 export default {
   name: "LessonView",
   data() {
@@ -27,19 +26,28 @@ export default {
       studentLessons: [],
       slideId: "",
       userID: "",
+      position: 0,
     };
   },
   props: {
     user: Object,
   },
   mounted() {
-    const studentLessons = api.getStudentLesson();
-    const lessons = api.getLessons();
-    Promise.all([studentLessons, lessons]).then(([studentLessons, lessons]) => {
+    api.getLessons().then((lessons) => {
+      // console.log(lessons);
       this.userID = this._props.user.id;
-      // console.log("working");
-      this.studentLessons = studentLessons;
+      // this.studentLessons = studentLessons;
       this.lessons = lessons;
+      for (let i = 0; i < lessons.length; i++) {
+        console.log(lessons[i]._id);
+        this.findStudentLesson({
+          lesson: lessons[i]._id,
+          user: this._props.user.id,
+        }).then((studentLesson) => {
+          console.log(studentLesson);
+          this.lessons[i].position = this.position;
+        });
+      }
     });
   },
   created() {
@@ -50,6 +58,8 @@ export default {
   methods: {
     async findStudentLesson(obj) {
       const res = await api.findStudentLessons(obj);
+      console.log(res.data[0]);
+      this.position = res.data[0].position;
       // console.log(res, "return");
     },
   },

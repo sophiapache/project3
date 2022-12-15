@@ -61,11 +61,11 @@ export const api = {
     const res = await axios.get(baseSlideURL + id);
     return res.data;
   }),
-  getStudentLesson: handleError(async () => {
-    // console.log("front end");
-    const res = await axios.get(baseStudentLessonsURL);
+  updateStudentLesson: async (payload) => {
+    console.log(payload);
+    const res = await axios.put(baseStudentLessonURL + payload._id, payload);
     return res.data;
-  }),
+  },
   createUser: async (payload) => {
     const res = await axios.post(userURL, payload);
     return res.data;
@@ -88,7 +88,6 @@ export const api = {
     if (res.data.length === 0) {
       res = api.createStudentLesson(ids);
     }
-    console.log(res);
     return res;
   }),
   createStudentLesson: async (payload) => {
@@ -100,15 +99,4 @@ export const findPosition = (position, slides) => {
   const currentSlide = slides[position];
   console.log(currentSlide);
   return currentSlide;
-};
-
-export const verifyUser = async () => {
-  try {
-    const res = await api.getUser();
-    this.name = res.data.user.name;
-    this.email = res.data.user.email;
-    this.id = res.data.user.id;
-  } catch (err) {
-    console.log(err);
-  }
 };
