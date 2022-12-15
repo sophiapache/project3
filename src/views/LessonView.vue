@@ -39,12 +39,10 @@ export default {
       // this.studentLessons = studentLessons;
       this.lessons = lessons;
       for (let i = 0; i < lessons.length; i++) {
-        console.log(lessons[i]._id);
         this.findStudentLesson({
           lesson: lessons[i]._id,
           user: this._props.user.id,
         }).then((studentLesson) => {
-          console.log(studentLesson);
           this.lessons[i].position = this.position;
         });
       }

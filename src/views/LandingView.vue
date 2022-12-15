@@ -8,7 +8,7 @@
 
 <script>
 // @ is an alias to /src
-
+import { api } from "../helpers/helpers";
 export default {
   name: "LandingView",
   props: {
@@ -19,9 +19,14 @@ export default {
       name: "",
       email: "",
       id: "",
+      studentLessons: [],
     };
   },
-  mounted() {
+  async mounted() {
+    const studentLessons = await api.getStudentLessons({
+      user: this._props.user.id,
+    });
+    this.studentLessons = studentLessons.data;
     this.name = this._props.user.name;
     this.email = this._props.user.email;
     this.id = this._props.user.id;

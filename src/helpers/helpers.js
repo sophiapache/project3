@@ -94,9 +94,13 @@ export const api = {
     const res = await axios.post(baseStudentLessonsURL, payload);
     return res;
   },
+  getStudentLessons: async (ids) => {
+    // console.log(ids);
+    let res = await axios.get(`${baseStudentLessonsURL}?user=${ids.user}`);
+    return res;
+  },
 };
 export const findPosition = (position, slides) => {
   const currentSlide = slides[position];
-  console.log(currentSlide);
   return currentSlide;
 };

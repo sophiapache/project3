@@ -37,12 +37,16 @@
 <script>
 import { api } from "../helpers/helpers";
 export default {
+  props: {
+    user: Object,
+  },
   name: "ShowQuiz",
   data() {
     return {
       quizzes: [],
       answers: [],
       selected: [],
+      studentLesson: {},
     };
   },
   methods: {
@@ -56,8 +60,8 @@ export default {
           score += 20;
         }
       }
-      console.log(score);
-      return score;
+      api.updateStudentLesson({ _id: this.studentLesson._id, grade: score });
+      this.$router.push("/quizzes");
     },
     attempt(e, i) {
       this.quizzes.Questions[i].attempt = e;
@@ -66,8 +70,11 @@ export default {
   async mounted() {
     this.quizzes = await api.getQuiz(this.$route.params.quizId);
     this.quizzes.Questions.forEach((q) => (q.attempt = null));
-
-    // this.questions = this.quizzes.Questions;
+    const studentLesson = await api.findStudentLessons({
+      user: this._props.user.id,
+      lesson: this.quizzes.lessonId,
+    });
+    this.studentLesson = studentLesson.data[0];
   },
 };
 </script>

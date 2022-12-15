@@ -52,7 +52,11 @@
               </template>
               <b-dropdown-item href="/users/signup">Sign Up</b-dropdown-item>
               <b-dropdown-item href="/users/login">Sign In</b-dropdown-item>
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
+              <b-dropdown-item href="#"
+                ><router-link to="/users/landing" exact>
+                  <i class="comment outline icon" /> profile
+                </router-link></b-dropdown-item
+              >
               <b-dropdown-item href="#" @click="logout"
                 >Sign Out</b-dropdown-item
               >
