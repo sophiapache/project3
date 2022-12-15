@@ -56,24 +56,22 @@
               <template #button-content>
                 <em>User</em>
               </template>
-              <b-dropdown-item v-if="!login"
+              <b-dropdown-item
                 ><router-link to="/users/signup" exact>
                   Sign up
                 </router-link></b-dropdown-item
               >
-              <b-dropdown-item v-if="!login"
+              <b-dropdown-item
                 ><router-link to="/users/login" exact>
                   Sign In
                 </router-link></b-dropdown-item
               >
-              <b-dropdown-item v-if="login"
+              <b-dropdown-item
                 ><router-link to="/users/landing" exact>
                   Profile
                 </router-link></b-dropdown-item
               >
-              <b-dropdown-item v-if="login" @click="logout"
-                >Sign Out</b-dropdown-item
-              >
+              <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-navbar-nav>
@@ -87,20 +85,25 @@ export default {
   name: "Navbar",
   data() {
     return {
-      login: false,
+      loggedIn: false,
     };
   },
+  props: {
+    login: Boolean,
+  },
+  watch: {
+    login: function (newVal) {
+      console.log(newVal);
+      this.loggedIn = newVal;
+    },
+  },
   mounted() {
-    if (localStorage.getItem("token") === null) {
-      this.login = false;
-    } else {
-      this.login = true;
-    }
+    this.loggedIn = this._props.login;
   },
   methods: {
     logout() {
       localStorage.clear();
-      this.login("false");
+      this.loggedIn = false;
       this.$router.push("/");
     },
   },
