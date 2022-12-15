@@ -76,13 +76,16 @@ export default {
 }
 h1 {
   color: lightslategray;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 h3 {
   margin: 40px 0 0;
 }
 h2 {
-  color: white;
+  color: lightslategray;
   padding-top: 50px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 300%;
 }
 ul {
   list-style-type: none;

@@ -1,35 +1,37 @@
 <template>
-  <div>
-    {{ quizzes.name }}
+  <form @submit.prevent="onSubmit">
+    <h1>{{ quizzes.name }}</h1>
     <b-form-group
       v-for="(quiz, i) in quizzes.Questions"
       :label="quiz.Question"
       v-slot="{ ariaDescribedby }"
       :key="i"
+      id="fieldset-1"
     >
       <b-form-radio
-        v-model="selected1"
         :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="A"
+        :name="quiz.Question"
+        :value="quiz.A1"
+        @change="attempt($event, i)"
         >{{ quiz.A1 }}</b-form-radio
       >
       <b-form-radio
-        v-model="selected1"
         :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="B"
+        :name="quiz.Question"
+        :value="quiz.A2"
+        @change="attempt($event, i)"
         >{{ quiz.A2 }}</b-form-radio
       >
       <b-form-radio
-        v-model="selected2"
         :aria-describedby="ariaDescribedby"
-        name="some-radios"
-        value="C"
+        :name="quiz.Question"
+        :value="quiz.A3"
+        @change="attempt($event, i)"
         >{{ quiz.A3 }}</b-form-radio
       >
     </b-form-group>
-  </div>
+    <b-button size="lg" pill type="submit">Submit</b-button>
+  </form>
 </template>
 
 <script>
@@ -39,15 +41,63 @@ export default {
   data() {
     return {
       quizzes: [],
-      selected1: "",
-      selected2: "",
-      selected3: "",
-      selected4: "",
-      selected5: "",
+      answers: [],
+      selected: [],
     };
+  },
+  methods: {
+    onSubmit() {
+      console.log("hello");
+      let score = 0;
+      for (let i = 0; i < this.quizzes.Questions.length; i++) {
+        if (
+          this.quizzes.Questions[i].attempt === this.quizzes.Questions[i].CA
+        ) {
+          score += 20;
+        }
+      }
+      console.log(score);
+      return score;
+    },
+    attempt(e, i) {
+      this.quizzes.Questions[i].attempt = e;
+    },
   },
   async mounted() {
     this.quizzes = await api.getQuiz(this.$route.params.quizId);
+    this.quizzes.Questions.forEach((q) => (q.attempt = null));
+
+    // this.questions = this.quizzes.Questions;
   },
 };
 </script>
+
+<style scoped>
+form {
+  width: 50vw;
+  text-align: center;
+  position: relative;
+  left: 25%;
+}
+.form-group {
+  padding: 5em;
+}
+
+label {
+  font-weight: normal;
+}
+#fieldset-1 {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(5px);
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+}
+
+.col-form-label {
+  font-weight: bolder;
+  font-style: italic;
+}
+h1 {
+  padding-top: 50px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+</style>
