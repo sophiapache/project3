@@ -18,6 +18,7 @@
       </b-card-header>
 
       <b-card-body class="text-center">
+        <img :src="image" class="slideimage" />
         <b-card-title>{{ title }}</b-card-title>
 
         <b-card-text>
@@ -65,5 +66,10 @@ export default {
   font-size: 250%;
   justify-content: space-between;
   padding-top: 2em;
+}
+
+.slideimage {
+  width: 800px;
+  height: 300px;
 }
 </style>

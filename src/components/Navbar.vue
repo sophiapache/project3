@@ -22,13 +22,13 @@
                 <i class="comment outline icon" /> All Lessons
               </router-link></b-dropdown-item
             >
-            <b-dropdown-item href="#">Intro to Biology</b-dropdown-item>
-            <b-dropdown-item
-              :to="{ path: '/quizzes/639aa770603f11cc25f8b5d3' }"
+            <b-dropdown-item href="#" disabled
+              >Intro to Biology</b-dropdown-item
             >
-              Intro
-            </b-dropdown-item>
-            <b-dropdown-item href="#">Intro to Physics</b-dropdown-item>
+            <b-dropdown-item disabled> Intro to Chemistry </b-dropdown-item>
+            <b-dropdown-item href="#" disabled
+              >Intro to Physics</b-dropdown-item
+            >
           </b-nav-item-dropdown>
 
           <b-navbar-nav class="ml-auto">
@@ -38,12 +38,18 @@
                   <i class="comment outline icon" /> All Quizzes
                 </router-link></b-dropdown-item
               >
-              <b-dropdown-item href="#">Intro to Biology Quiz</b-dropdown-item>
+              <b-dropdown-item
+                :to="{ path: '/quizzes/63994cef2adf2bcb102df2bb' }"
+                >Intro to Biology Quiz</b-dropdown-item
+              >
               <b-dropdown-item
                 :to="{ path: '/quizzes/639aa770603f11cc25f8b5d3' }"
                 >Intro to Chemistry Quiz</b-dropdown-item
               >
-              <b-dropdown-item href="#">Intro to Physics Quiz</b-dropdown-item>
+              <b-dropdown-item
+                :to="{ path: '/quizzes/639aa993603f11cc25f8b5d4' }"
+                >Intro to Physics Quiz</b-dropdown-item
+              >
             </b-nav-item-dropdown>
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
@@ -62,7 +68,7 @@
               >
               <b-dropdown-item
                 ><router-link to="/users/landing" exact>
-                  profile
+                  Profile
                 </router-link></b-dropdown-item
               >
               <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
