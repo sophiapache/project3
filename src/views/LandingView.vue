@@ -67,6 +67,7 @@
 <script>
 // @ is an alias to /src
 import { api } from "../helpers/helpers";
+
 export default {
   name: "LandingView",
   props: {

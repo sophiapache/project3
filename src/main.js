@@ -8,9 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faFrog } from "@fortawesome/free-solid-svg-icons";
-import { faFlask } from "@fortawesome/free-solid-svg-icons";
-import { faAtom } from "@fortawesome/free-solid-svg-icons";
+import { faFrog, faFlask, faAtom } from "@fortawesome/free-solid-svg-icons";
 
 import Popper from "popper.js";
 Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false;
