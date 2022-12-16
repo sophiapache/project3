@@ -53,7 +53,7 @@ export default {
 
         if (res.status === 200) {
           localStorage.setItem("token", res.data.token);
-          this.$emit("toggleLogin", true);
+          this.$emit("userLogin", res.data.user);
           this.$router.push("/users/landing");
         }
       } catch (err) {
