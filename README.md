@@ -8,46 +8,42 @@
 
 ### Overview
 
-TRx (pronounced Tracks) is a prescription tracking website, where you
-can log current prescriptions and their histories. You may also write
-journal entries to describe your experiences on your prescriptions and
-any side effects you may be experiencing. Below, you can see a sample of
-our medication library that describes common medications and common
-adverse effects / warnings.
+Atomic Academy is an educational science website aimed for an audience looking to acquire knowledge in elementary biology, chemistry, and physics. A user can log in and browse various lessons that use both text information and videos to teach. The server keeps track of where the user was last in the lesson so that if they return to the lesson, their position in the slides is remembered.
 
-Atomic Academy is an educational science website aimed for an audience looking to acquire knowledge in elementary biology, chemistry, and physics. A user can log in and browse various lessons that use both text information and videos to teach.
+Once they complete the lesson, they can take a quiz to test their knowledge on the subject. Once the quiz is completed, they receive a badge on their profile and are able to see their grade later on the profile.
 
 ### Language Stack
 
-This project was created with using React as a front-end and Firebase as the back-end.
+This project was created with using Vue.js as a front-end and Express.js as the back-end with a MongoDB database.
 
 1. JavaScript
 2. HTML
 3. CSS
+4. SCSS
 
 ### APIs/Packages/Technologies Used
 
-- React
-- Firebase
-- OpenFDA API
-- Bootstrap
-- Material UI
+- Vue.Js
+- Express.Js
+- Node.Js
+- MongoDB
+- Bootstrap for Vue
 - Axios
 - SASS
+- Heroku
+- Font Awesome
+- Render
 
 ### Features
 
-A user can create an account and log in with their credientials to keep their prescriptions and journals private.
+A user can create an account and log in with their credientials to keep track of their progress in the course.
 
-Once logged in, a user can create prescription files, keeping track of their dosages, refills, refill date, etc
-They can also write journal entries to describe their experiences on certain medications and the side effects and pain levels they are experiencing.
-
-The website features a medication library, where you can create new medication information in the database by searching a medication and having an API retrieve information on it, such as the brand and generic name, description, and adverse effects.
+They can browse through lessons on various science topics and later take a short quiz based on the lessons teachings. User can keep track of their grades and completion of lessons on their profile.
 
 ### Improvements
 
-There are still quite a few bugs that can be fixed throughout the site and I think due to each page being a single page application it is essential we implement more automatic page updating without the user having to refresh to see any changes.
+We plan to add a teacher functionality, where they can keep track of their students grades and completion of lessons.
 
 ### Acknowledgments
 
-Thank you to the colloboration of all the groupmates and of course, Joel and Loden for always providing the BEST guidance.
+Thank you Joel and Loden for always helping and wish everyone the best.
