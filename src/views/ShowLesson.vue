@@ -22,11 +22,13 @@ export default {
   },
   props: {
     user: Object,
+    lessons: Array,
   },
   data() {
     return {
       slide: {},
-      lessons: {},
+      lesson: {},
+      // lessons: {},
       studentLesson: {},
       position: 0,
       slideId: "",
@@ -36,52 +38,50 @@ export default {
   methods: {
     // have child emit data to then call this function
     onForwardClick() {
-      api.getLesson(this.$route.params.lessonId).then((lessons) => {
-        this.lessons = lessons;
-        if (this.position >= this.lessons.slides.length - 1) {
-          return;
-        } else {
-          this.position++;
-          if (this.position > this.studentPosition) {
-            api.updateStudentLesson({
-              position: this.position,
-              _id: this.studentLesson._id,
-            });
-          }
-          this.slideId = findPosition(this.position, lessons.slides);
-          this.$router.push(`/${this.$route.params.lessonId}/${this.slideId}`);
-          const slides = api.getSlide(this.slideId).then((slides) => {
-            this.slide = slides;
+      if (this.position >= this.lesson.slides.length - 1) {
+        return;
+      } else {
+        this.position++;
+        if (this.position > this.studentPosition) {
+          api.updateStudentLesson({
+            position: this.position,
+            _id: this.studentLesson._id,
           });
         }
-      });
+        this.slideId = findPosition(this.position, this.lesson.slides);
+        this.$router.push(`/${this.$route.params.lessonId}/${this.slideId}`);
+        const slides = api.getSlide(this.slideId).then((slides) => {
+          this.slide = slides;
+          console.log("forward");
+        });
+      }
     },
     onBackClick() {
-      api.getLesson(this.$route.params.lessonId).then((lessons) => {
-        this.lessons = lessons;
-        if (this.position === 0) {
-          return;
-        } else {
-          this.position--;
-          this.slideId = findPosition(this.position, this.lessons.slides);
-          this.$router.push(`/${this.$route.params.lessonId}/${this.slideId}`);
-          const slides = api.getSlide(this.slideId).then((slides) => {
-            this.slide = slides;
-          });
-        }
-      });
+      if (this.position === 0) {
+        return;
+      } else {
+        this.position--;
+        this.slideId = findPosition(this.position, this.lesson.slides);
+        this.$router.push(`/${this.$route.params.lessonId}/${this.slideId}`);
+        const slides = api.getSlide(this.slideId).then((slides) => {
+          this.slide = slides;
+          console.log("back");
+        });
+      }
     },
   },
   async mounted() {
-    const studentLesson = await api.findStudentLessons({
-      user: this._props.user.id,
-      lesson: this.$route.params.lessonId,
-    });
-    this.studentLesson = studentLesson.data[0];
+    this.lesson = await this._props.lessons.find(
+      (lesson) => lesson._id === this.$route.params.lessonId
+    );
+    this.studentLesson = await this._props.user.studentLessons.find(
+      (studentLesson) => studentLesson.lessonId === this.$route.params.lessonId
+    );
     this.slide = await api.getSlide(this.$route.params.slideId);
     this.position = this.studentLesson.position;
     this.studentPosition = this.studentLesson.position;
   },
+
   created() {
     if (localStorage.getItem("token") === null) {
       this.$router.push("/users/login");

@@ -6,7 +6,10 @@
         <router-link
           :to="{
             name: 'show',
-            params: { lessonId: lesson._id, slideId: lesson.slides[position] },
+            params: {
+              lessonId: lesson._id,
+              slideId: lesson.slides[lesson.position],
+            },
           }"
         >
           {{ lesson.title }}
@@ -22,7 +25,6 @@ export default {
   name: "LessonView",
   data() {
     return {
-      lessons: [],
       studentLessons: [],
       slideId: "",
       userID: "",
@@ -31,23 +33,9 @@ export default {
   },
   props: {
     user: Object,
+    lessons: Array,
   },
-  mounted() {
-    api.getLessons().then((lessons) => {
-      // console.log(lessons);
-      this.userID = this._props.user.id;
-      // this.studentLessons = studentLessons;
-      this.lessons = lessons;
-      for (let i = 0; i < lessons.length; i++) {
-        this.findStudentLesson({
-          lesson: lessons[i]._id,
-          user: this._props.user.id,
-        }).then((studentLesson) => {
-          this.lessons[i].position = this.position;
-        });
-      }
-    });
-  },
+  mounted() {},
   created() {
     if (localStorage.getItem("token") === null) {
       this.$router.push("/users/login");

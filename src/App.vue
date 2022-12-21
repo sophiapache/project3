@@ -8,40 +8,78 @@
         src="https://thumbs.dreamstime.com/b/female-college-student-working-academic-research-close-up-female-college-student-working-academic-research-school-154308272.jpg"
       />
     </div>
-    <router-view :user="user" @userLogin="userLogin" />
+    <loading v-if="loading" />
+    <router-view
+      v-else
+      :user="user"
+      @userLogin="userLogin"
+      :lessons="lessons"
+    />
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
 import { api } from "./helpers/helpers";
+import Loading from "./components/Loading.vue";
 export default {
   name: "App",
   components: {
     Navbar,
+    Loading,
   },
   async mounted() {
     try {
-      const res = await api.getUser();
-      this.user.name = res.data.user.name;
-      this.user.email = res.data.user.email;
-      this.user.id = res.data.user.id;
+      await this.updateUser();
+      await this.updateLessons();
+      await this.updateStudentLessons();
     } catch (err) {
       console.log(err);
+    } finally {
+      console.log("user", this.user);
+      console.log("lessons", this.lessons);
+      this.loading = false;
     }
   },
   methods: {
     userLogin(user) {
-      console.log(user);
+      this.user.name = user.name;
+      this.user.email = user.email;
+      this.user.id = user.id;
+      this.updateStudentLessons();
+    },
+    async updateUser() {
+      const res = await api.getUser();
+      this.user.name = res.data.user.name;
+      this.user.email = res.data.user.email;
+      this.user.id = res.data.user.id;
+    },
+    async updateLessons() {
+      const res = await api.getLessons();
+      this.lessons = res;
+    },
+    async updateStudentLessons() {
+      for (let i = 0; i < this.lessons.length; i++) {
+        const studentLesson = await api.findStudentLessons({
+          lesson: this.lessons[i]._id,
+          user: this.user.id,
+        });
+        this.user.studentLessons.push(studentLesson.data[0]);
+        this.lessons[i].position = studentLesson.data[0].position;
+        // console.log(this.lessons[i]);
+      }
     },
   },
   data() {
     return {
+      loading: true,
       user: {
         email: "",
         name: "",
         id: null,
+        studentLessons: [],
       },
+      lessons: [],
       login: false,
     };
   },
@@ -49,7 +87,7 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 #app {
   font-family: Lato, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

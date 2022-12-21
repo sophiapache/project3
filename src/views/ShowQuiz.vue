@@ -7,6 +7,7 @@
       v-slot="{ ariaDescribedby }"
       :key="i"
       id="fieldset-1"
+      class="question"
     >
       <b-form-radio
         :aria-describedby="ariaDescribedby"
@@ -70,11 +71,9 @@ export default {
   async mounted() {
     this.quizzes = await api.getQuiz(this.$route.params.quizId);
     this.quizzes.Questions.forEach((q) => (q.attempt = null));
-    const studentLesson = await api.findStudentLessons({
-      user: this._props.user.id,
-      lesson: this.quizzes.lessonId,
-    });
-    this.studentLesson = studentLesson.data[0];
+    this.studentLesson = await this._props.user.studentLessons.find(
+      (studentLesson) => studentLesson.lessonId === this.$route.params.lessonId
+    );
   },
 };
 </script>
@@ -90,9 +89,6 @@ form {
   padding: 5em;
 }
 
-label {
-  font-weight: normal;
-}
 #fieldset-1 {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(5px);

@@ -20,15 +20,13 @@ Vue.use(FlashMessage, {
 // });
 
 const vueInstance = new Vue();
-const baseLessonURL = "https://atomic-academy-server.herokuapp.com/lessons/";
-const baseQuizURL = "https://atomic-academy-server.herokuapp.com/quizzes/";
-const baseSlideURL = "https://atomic-academy-server.herokuapp.com/slides/";
-const baseStudentLessonsURL =
-  "https://atomic-academy-server.herokuapp.com/studentlessons/";
-const baseStudentLessonURL =
-  "https://atomic-academy-server.herokuapp.com/studentlesson/";
-const userURL = "https://atomic-academy-server.herokuapp.com/users/";
-const loginURL = "https://atomic-academy-server.herokuapp.com/login/";
+const baseLessonURL = "http://localhost:3000/lessons/";
+const baseQuizURL = "http://localhost:3000/quizzes/";
+const baseSlideURL = "http://localhost:3000/slides/";
+const baseStudentLessonsURL = "http://localhost:3000/studentlessons/";
+const baseStudentLessonURL = "http://localhost:3000/studentlesson/";
+const userURL = "http://localhost:3000/users/";
+const loginURL = "http://localhost:3000/login/";
 
 const handleError =
   (fn) =>

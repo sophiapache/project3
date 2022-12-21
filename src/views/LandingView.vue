@@ -1,9 +1,13 @@
 <template>
   <div class="background">
-    <h1>Hello {{ name }}!</h1>
-    <h2>Your email is {{ email }}.</h2>
-    <h3>Your student ID is {{ id }}.</h3>
-    <div v-for="(studentLesson, i) in studentLessons" :key="i" class="badges">
+    <h1>Hello {{ user.name }}!</h1>
+    <h2>Your email is {{ user.email }}.</h2>
+    <h3>Your student ID is {{ user.id }}.</h3>
+    <div
+      v-for="(studentLesson, i) in studentLessons"
+      :key="studentLessons[i].lessonId"
+      class="badges"
+    >
       <span v-if="studentLessons[i].grade">
         <font-awesome-icon
           icon="fa-solid fa-frog"
@@ -35,7 +39,10 @@
       </span>
     </div>
     <h3>Quiz Grades:</h3>
-    <div v-for="(studentLesson, i) in studentLessons" :key="i">
+    <div
+      v-for="(studentLesson, i) in studentLessons"
+      :key="studentLessons[i]._id"
+    >
       <span
         v-if="
           studentLessons[i].lessonId === '6396843b46e9febd191de195' &&
@@ -75,25 +82,25 @@ export default {
   },
   data() {
     return {
+      userDetails: {},
       name: "",
       email: "",
       id: "",
       studentLessons: [],
     };
   },
-  async mounted() {
-    const studentLessons = await api.getStudentLessons({
-      user: this._props.user.id,
-    });
-    this.studentLessons = studentLessons.data;
-    this.name = this._props.user.name;
-    this.email = this._props.user.email;
-    this.id = this._props.user.id;
+  mounted() {
+    this.updateDetails();
   },
   created() {
     if (localStorage.getItem("token") === null) {
       this.$router.push("/users/login");
     }
+  },
+  methods: {
+    updateDetails() {
+      this.studentLessons = this._props.user.studentLessons;
+    },
   },
 };
 </script>
