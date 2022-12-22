@@ -143,4 +143,11 @@ h3 {
 #flask {
   color: blue;
 }
+
+@media screen and (max-width: 600px) {
+  .background {
+    width: 100vw;
+    left: 0%;
+  }
+}
 </style>
