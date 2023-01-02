@@ -20,10 +20,21 @@
       <b-card-body class="text-center">
         <b-card-title>{{ title }}</b-card-title>
 
-        <b-card-text>
+        <b-card-text class="desktop">
           <iframe
             width="560"
             height="315"
+            v-bind:src="video"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </b-card-text>
+        <b-card-text class="mobile">
+          <iframe
+            width="360"
+            height="175"
             v-bind:src="video"
             title="YouTube video player"
             frameborder="0"
@@ -45,3 +56,26 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.desktop {
+  visibility: visible;
+}
+
+.mobile {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .text-center {
+    width: 100vw;
+  }
+
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    visibility: visible;
+  }
+}
+</style>

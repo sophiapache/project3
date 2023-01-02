@@ -103,4 +103,11 @@ h1 {
   padding-top: 50px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+@media screen and (max-width: 600px) {
+  form {
+    width: 100vw;
+    left: 0%;
+  }
+}
 </style>

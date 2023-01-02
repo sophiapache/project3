@@ -72,4 +72,26 @@ export default {
   width: 800px;
   height: 300px;
 }
+
+@media screen and (max-width: 600px) {
+  h4 {
+    width: 100vw;
+    position: absolute;
+    left: 0%;
+    padding-top: 20px;
+  }
+
+  p {
+    position: absolute;
+    width: 100vw;
+    left: 0%;
+    top: 90%;
+  }
+
+  .slideimage {
+    margin-left: -150px;
+    width: 100vw;
+    height: 200px;
+  }
+}
 </style>

@@ -6,6 +6,7 @@
     <div class="banner">
       <img
         src="https://thumbs.dreamstime.com/b/female-college-student-working-academic-research-close-up-female-college-student-working-academic-research-school-154308272.jpg"
+        class="bannerimg"
       />
     </div>
     <loading v-if="loading" />
@@ -113,5 +114,9 @@ nav a.router-link-exact-active {
 }
 .banner {
   box-shadow: 0px 10px 5px rgb(131, 131, 131);
+}
+
+.bannerimg {
+  width: 100vw;
 }
 </style>
